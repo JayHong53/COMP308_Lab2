@@ -45,7 +45,7 @@ body {
 }
 
 .container-large {
-  width: 800px;
+  width: 1200px;
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
@@ -80,17 +80,17 @@ body {
 }
 
 .table-box th {
-  padding: 20px 15px;
+  padding: 15px 10px;
   background-color: #0D453E;
   color: white;
   text-transform: uppercase;
-  text-align: left;
+  text-align: center;
   font-size: 13px;
 }
 
 .table-box td {
   background-color: #0D453E20;
-  padding: 15px;
+  padding: 10px;
   text-align: left;
   font-size: 14px;
 }
@@ -103,19 +103,63 @@ body {
   background-color: #0D453E10;
 }
 
-.table-box-button {
+/* .table-button-view {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #E27D60;
-  width: 100%;
+  background: #497f3a;
+  width: 33%;
+  max-width: 60px;
   border: 0;
-  padding: 10px 0px 10px 0px;
+  padding: 5px 0px 5px 0px;
+  margin: 2px;
   color: #FFFFFF;
   font-size: 12px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
+} */
+
+.table-button-update {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #E27D60;
+  width: 60px;
+  border: 0;
+  padding: 5px 0px 5px 0px;
+  margin: 2px;
+  color: #FFFFFF;
+  font-size: 12px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.table-button-delete {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #b62c05;
+  width: 60px;
+  border: 0;
+  padding: 5px 0px 5px 0px;
+  margin: 2px;
+  color: #FFFFFF;
+  font-size: 12px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.add-button-container {
+  margin-top: 30px;
+}
+
+.nostudent-message {
+  margin-top: 20px;
+  font-style: italic;
+  font-size: 20px;
 }
 
 /* Table Styling -End */
