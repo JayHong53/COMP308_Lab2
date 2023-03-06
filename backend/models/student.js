@@ -4,7 +4,7 @@ const studentSchema = mongoose.Schema({
     studentNo: {
         type: Number,
         required: [true, 'Please enter the student number'],
-        unique: true,
+        unique: [true, 'Student number already exists'],
     },
     firstName: {
         type: String,
@@ -21,7 +21,7 @@ const studentSchema = mongoose.Schema({
     email: {
         type: String,
         required: [true, 'Please enter an email address'],
-        unique: true,
+        unique: [true, 'Email address is in use']
     },
     phone: {
         type: String,

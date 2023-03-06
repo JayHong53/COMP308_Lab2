@@ -1,5 +1,4 @@
 const asyncHander = require('express-async-handler')
-const student = require('../models/student')
 const Student = require('../models/student')
 
 //@ desc    Get All Students
@@ -19,6 +18,7 @@ const getStudentById = asyncHander(async (req, res) => {
     try {
         await Student.findById(req.params.id)
     } catch (error) {
+        res.status(500).json(error)
         throw new Error('Student not found in the database')
     } 
     

@@ -53,7 +53,7 @@ body {
 
 /* register link */
 .register-link {
-  color: #000000; 
+  color: #000000;
   text-align: center;
 }
 
@@ -99,8 +99,54 @@ body {
   margin: 15px 0px;
 }
 
-.table-box tr:nth-of-type(even) td{
+.table-box tr:nth-of-type(even) td {
   background-color: #0D453E10;
+}
+
+.searchBar {
+  display: flex;
+  height: 30px;
+  margin-top: 20px;
+  margin-bottom: -10px;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+}
+
+.searchBar input,
+select {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #F0F0F0;
+  width: 80px;
+  height: 80%;
+  border: 1px solid, black;
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-size: 12px;
+  text-align: center;
+}
+
+.searchBar button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #E27D60;
+  width: 80px;
+  height: 80%;
+  border: 0;
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+  color: #FFFFFF;
+  font-size: 12px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+#searchBar-button-cancel{
+  background: #b62c05;
 }
 
 /* .table-button-view {
@@ -214,7 +260,9 @@ body {
 }
 
 /* Form input group styling */
-.form-box input, select, textarea {
+.form-input,
+.form-select,
+.form-textarea {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #F0F0F0;
@@ -235,7 +283,6 @@ body {
   text-align: center;
 }
 
-
 .form-button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -244,7 +291,7 @@ body {
   width: 100%;
   max-width: 310px;
   border: 0;
-  margin:15px 0px 0px 0px;
+  margin: 15px 0px 0px 0px;
   padding: 15px;
   color: #FFFFFF;
   font-size: 14px;
@@ -261,7 +308,7 @@ body {
   width: 100%;
   max-width: 310px;
   border: 0;
-  margin:15px 0px 0px 0px;
+  margin: 15px 0px 0px 0px;
   padding: 15px;
   color: #FFFFFF;
   font-size: 14px;

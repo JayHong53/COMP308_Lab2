@@ -56,6 +56,7 @@ const StudentUpdateForm = () => {
                         <input type="text" placeholder="LastName" name="lastName" value={student.lastName} onChange={onChange} />
 
                         <select name="program" value={student.program} onChange={onChange}>
+                            <option value="">Program</option>
                             <option value="Software Engineering Technology">
                                 Software Engineering Technology
                             </option>
