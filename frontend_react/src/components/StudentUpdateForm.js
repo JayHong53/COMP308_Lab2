@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
 
 const StudentUpdateForm = () => {
     let { id } = useParams();
     const navigate = useNavigate();
     const apiUrl = 'http://localhost:5050/api/student/' + id;
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errors, setErrors] = useState([]);
     const [student, setStudent] = useState({
         studentNo: '',
         firstName: '',
@@ -18,23 +18,26 @@ const StudentUpdateForm = () => {
         city: '',
         province: ''
     })
-
+    
     useEffect(() => {
-        console.log(id)
-        const fetchData = async () => {
-            const result = await axios(apiUrl);
-            setStudent(result.data)
-        }
         fetchData()
     }, [])
+    
+    const fetchData = async () => {
+        const result = await axios(apiUrl);
+        setStudent(result.data)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(student);
-        axios.put(apiUrl, {"student": student})
+        axios.put(apiUrl, student)
         .then(() => {
             navigate('/');
         })
+        .catch((err) => {
+            setErrors(err.response.data.errors)
+        });
     }
 
     const onChange = (e) => {
@@ -49,12 +52,21 @@ const StudentUpdateForm = () => {
                     <div className="form-title">Update Student</div>
                     <form className="register-form" onSubmit={handleSubmit}>
 
-                        <input className="form-input" type="text" placeholder="StudentNumber" name="studentNo" value={student.studentNo} onChange={onChange} />
+                        <input className="form-input" type="text" placeholder="StudentNumber" name="studentNo"
+                            value={student.studentNo} onChange={onChange} maxLength="9"/>
+                        {errors.studentNo ? <div className="errorMessage-form">{errors.studentNo}</div> : <></>}
 
-                        <input className="form-input" type="text" placeholder="FirstName" name="firstName" value={student.firstName} onChange={onChange} />
 
-                        <input className="form-input" type="text" placeholder="LastName" name="lastName" value={student.lastName} onChange={onChange} />
+                        <input className="form-input" type="text" placeholder="FirstName" name="firstName"
+                            value={student.firstName} onChange={onChange}/>
+                        {errors.firstName ? <div className="errorMessage-form">{errors.firstName}</div> : <></>}
 
+
+                        <input className="form-input" type="text" placeholder="LastName" name="lastName"
+                            value={student.lastName} onChange={onChange}/>
+                        {errors.lastName ? <div className="errorMessage-form">{errors.lastName}</div> : <></>}
+
+                        {student.program === '' ? <div className="form-label" >Program</div> : <></>}
                         <select className="form-select" name="program" value={student.program} onChange={onChange}>
                             <option value="">Program</option>
                             <option value="Software Engineering Technology">
@@ -66,35 +78,44 @@ const StudentUpdateForm = () => {
                                 Health Informatic Technology
                             </option>
                         </select>
+                        {errors.program ? <div className="errorMessage-form">{errors.program}</div> : <></>}
 
                         <input className="form-input" type="text" placeholder="Email" name="email" value={student.email} onChange={onChange} />
+                        {errors.email ? <div className="errorMessage-form">{errors.email}</div> : <></>}
 
                         <input className="form-input" type="text" placeholder="Phone" name="phone" value={student.phone} onChange={onChange} />
+                        {errors.phone ? <div className="errorMessage-form">{errors.phone}</div> : <></>}
 
                         <input className="form-input" type="text" placeholder="StreetAddress" name="street" value={student.street} onChange={onChange} />
+                        {errors.street ? <div className="errorMessage-form">{errors.street}</div> : <></>}
 
                         <input className="form-input" type="text" placeholder="City" name="city" value={student.city} onChange={onChange} />
+                        {errors.city ? <div className="errorMessage-form">{errors.city}</div> : <></>}
 
-                        <div className="form-label" >Province</div>
+                        {student.province === '' ? <div className="form-label" >Province</div> : <></>}
                         <select className="form-select" name="province" value={student.province} onChange={onChange}>
                             <option value="">Province</option>
                             <option value="Alberta">Alberta</option>
                             <option value="British Columbia">British Columbia</option>
-                            <option value="MB">MB</option>
-                            <option value="NB">NB</option>
-                            <option value="NL">NL</option>
-                            <option value="NT">NT</option>
-                            <option value="NS">NS</option>
-                            <option value="NU">NU</option>
-                            <option value="ON">ON</option>
-                            <option value="PE">PE</option>
-                            <option value="QC">QC</option>
-                            <option value="SK">SK</option>
-                            <option value="YT">YT</option>
+                            <option value="Manitoba">Manitoba</option>
+                            <option value="New Brunswick">New Brunswick</option>
+                            <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                            <option value="Northwest Territories">Northwest Territories</option>
+                            <option value="Nova Scotia">Nova Scotia</option>
+                            <option value="Nunavut">Nunavut</option>
+                            <option value="Ontario">Ontario</option>
+                            <option value="Prince Edward Island">Prince Edward Island</option>
+                            <option value="Quebec">Quebec</option>
+                            <option value="Saskatchewan">Saskatchewan</option>
+                            <option value="Yukon">Yukon</option>
                         </select>
+                        {errors.province ? <div className="errorMessage-form">{errors.province}</div> : <></>}
 
                         <button className="form-button" type="submit">Submit</button>
                     </form>
+                    <Link to={`/`}>
+                        <button className="form-button-cancel">Back to List</button>
+                    </Link>
                 </div>
             </div>
         </>

@@ -29,6 +29,10 @@ body {
   font-weight: 500;
 }
 
+.header-link {
+  text-decoration: none;
+}
+
 /* Containers */
 .container-small {
   width: 400px;
@@ -87,7 +91,6 @@ body {
   text-align: center;
   font-size: 13px;
 }
-
 
 .table-box td {
   background-color: #0D453E20;
@@ -158,22 +161,10 @@ select {
   background: #b62c05;
 }
 
-/* .table-button-view {
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  outline: 0;
-  background: #497f3a;
-  width: 33%;
-  max-width: 60px;
-  border: 0;
-  padding: 5px 0px 5px 0px;
-  margin: 2px;
-  color: #FFFFFF;
-  font-size: 12px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
-} */
+.errorMessage-search {
+  font-size: 11px;
+  color: #FF0000;
+}
 
 .table-button-update {
   font-family: "Roboto", sans-serif;
@@ -221,19 +212,26 @@ select {
   left: 50%;
   padding: 15px;
   transform: translate(-50%, -50%);
-  padding: 10px;
+  padding: 30px;
+  border: solid #00000050 0.5px;
   z-index: 100;
   background-color:#FAFAFA;
-  box-shadow: 0 0 20px 0 #00000020, 0 5px 5px 0 #00000025
+  box-shadow: 0 0 20px 0 #00000040, 0 5px 5px 0 #00000025
+}
+
+.modal-message {
+  font-weight: 600;
+}
+
+.student-box {
+  margin: 15px 0px;
 }
 
 .nostudent-message {
-  margin-top: 20px;
+  margin-top: 40px;
   font-style: italic;
   font-size: 20px;
-}
-
-/* Table Styling -End */
+} /* Table Styling -End */
 
 /* Form Styling start */
 .form-title {
@@ -354,59 +352,71 @@ select {
   font-style: italic;
 }
 
-/* Result Page Text Styling */
+/* Student Detail */
 
-/* #review-textarea {
-  height: 100px;
-  resize: none;
-  vertical-align: middle;
-} 
-
-.result-message {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.result-course {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.result-review-card {
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.result-review {
-  font-size: 16px;
-  font-style: italic;
-  margin: 15px;
-}
-
-.result-user {
-  font-size: 12px;
-  font-style: italic;
-  margin-bottom: 10px;
-} */
-
-/* .form-box-review {
+/* table styling -start */
+.detail-box {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
-  max-width: 400px;
-  margin: 0 auto 100px;
+  max-width: 600px;
+  margin: 0 auto 15px;
   padding: 0px 45px 45px 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 #00000020, 0 5px 5px 0 #00000025
 }
 
-.form-box-result {
-  position: relative;
-  z-index: 1;
-  background: #FFFFFF;
-  max-width: 400px;
-  margin: 0 auto 100px;
-  padding: 45px;
+.detail-box table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0px 15px 0px;
+}
+
+.table-header {
+  background-color: #d3eeeb50;
+}
+
+.detail-box th {
+  padding: 15px 10px;
+  background-color: #0D453E;
+  color: white;
+  text-transform: uppercase;
   text-align: center;
-  box-shadow: 0 0 20px 0 #00000020, 0 5px 5px 0 #00000025
-} */
+  font-size: 13px;
+}
+
+.detail-box td {
+  background-color: #0D453E20;
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+
+td.td-button {
+  text-align: right;
+}
+
+td.td-button button {
+  text-align: center;
+}
+
+.detail-box tr {
+  margin: 15px 0px;
+}
+
+.detail-box tr:nth-of-type(even) td {
+  background-color: #0D453E10;
+}
+
+td.detail-category {
+  width: 150px;
+  text-align: center;
+  border-right: 0.1em solid #FFFFFF;
+}
+
+td.detail-value {
+  width: 450px;
+  text-align: center;
+}
+/* Student Detail - END */
+

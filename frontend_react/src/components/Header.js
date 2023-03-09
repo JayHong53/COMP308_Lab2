@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
     return (
         <>
-            <div className='header'>COMP308 Lab2 - Jiwoong Hong (301153138)</div>
+            <Link className="header-link" to={`/`}>
+                <div className='header'>COMP308 Lab2 - Jiwoong Hong (301153138)</div>
+            </Link>
         </>
     )
 }

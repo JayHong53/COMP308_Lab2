@@ -7,7 +7,6 @@ const errorFormatter = (e) => {
 
     // Unique value constraints 
     if (e.code && e.code === 11000) {
-
         let keyValue = e.keyPattern;
         if (keyValue.email) {
             errors.email = "The email address is already in use";
@@ -30,8 +29,6 @@ const errorFormatter = (e) => {
     
     return { 'errors' : errors }
 }
-
-
 
 //@ desc    Get All Students
 //@ route   GET /api/student
@@ -80,11 +77,12 @@ const updateStudent = asyncHander(async (req, res) => {
 
     try {
         let updatedStudent = await Student.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
+            new: true, runValidators: true,
         })
         res.status(200).json(updatedStudent)
     } catch (error) {
-        return res.status(404).json({ message: 'Failed to update the student data', error })
+        let err = errorFormatter(error)
+        return res.status(500).json(err);
     }
 }) //END updateStudent
 

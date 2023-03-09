@@ -2,15 +2,17 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from './Modal';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const StudentList = () => {
+    const navigate = useNavigate();
     const apiUrl = 'http://localhost:5050/api/student/';
     const [searchVal, setSearchVal] = useState('');
     const [searchCategory, setSearchCategory] = useState('');
+    const [searchError, setSearchError] = useState(false);
     const [students, setStudents] = useState([]);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [studentToDelete, setStudentToDelete] = useState();
+    const [studentSelected, setStudentSelected] = useState();
 
     useEffect(() => {
         fetchData();
@@ -36,13 +38,13 @@ const StudentList = () => {
     }
 
     const openDeleteModal = (student) => {
-        setStudentToDelete(student);
+        setStudentSelected(student);
         setShowDeleteModal(true);
     }
 
     const handleSearchByUserId = () => {
         if (searchVal === "" || searchCategory === "") {
-            alert("Please, enter a search criteria");
+            setSearchError(true);
         }
         else {
             const filteredStudents = students.filter((student) => {
@@ -56,14 +58,20 @@ const StudentList = () => {
                 }
                 return false;
             });
+            setSearchError(false);
             setStudents(filteredStudents);
         }
+    }
+
+    const handleOnRowClick = (studentId) => {
+        navigate('/detail/' + studentId)
     }
 
     // Reload the table 
     const handleCancelSearch = () => {
         setSearchVal('');
         setSearchCategory('');
+        setSearchError(false);
         fetchData();
     }
 
@@ -82,17 +90,19 @@ const StudentList = () => {
                 <input name="input-searchByVal" value={searchVal} onChange={(e) => { setSearchVal(e.target.value) }} type="text"></input>
                 <button className="btn-searchById" name="btn-searchById" onClick={handleSearchByUserId}>Search</button>
                 <button id="searchBar-button-cancel" name="btn-searchById-cancel" onClick={handleCancelSearch}>Reset</button>
+                {searchError ? <div className="errorMessage-search">Please enter the search criteria</div> : <></>}
             </div>
             {/* Search Bar End */}
 
             {/* Displaying No Student message */}
-            {students.length == 0 ? (
+            {students.length === 0 ? (
 
                 // Condition: No student
                 <div className="nostudent-message">
                     <div>No Matching Data Found</div>
                 </div>
             ) : (
+
 
                 // Condition: Students retrieved
                 <>
@@ -111,15 +121,13 @@ const StudentList = () => {
                         <tbody>
                             {students.map(student => (
                                 <tr key={student.studentNo} >
-                                    <td>{student.studentNo}</td>
-                                    <td>{`${student.firstName} ${student.lastName}`}</td>
-                                    <td>{student.program}</td>
-                                    <td>{student.email}</td>
-                                    <td>{student.phone}</td>
+                                    <td onClick={() => handleOnRowClick(student._id)} >{student.studentNo}</td>
+                                    <td onClick={() => handleOnRowClick(student._id)}>{`${student.firstName} ${student.lastName}`}</td>
+                                    <td onClick={() => handleOnRowClick(student._id)}>{student.program}</td>
+                                    <td onClick={() => handleOnRowClick(student._id)}>{student.email}</td>
+                                    <td onClick={() => handleOnRowClick(student._id)}>{student.phone}</td>
                                     <td className="td-button">
-                                        {/* <Link to={`/view/${student._id}`}>
-                                    <button className="table-button-view">View</button>
-                                </Link> */}
+                                        
                                         <Link to={`/update/${student._id}`}>
                                             <button className="table-button-update">Update</button>
                                         </Link>
@@ -133,8 +141,8 @@ const StudentList = () => {
                     </table>
                     <Modal
                         isOpen={showDeleteModal}
-                        student={studentToDelete}
-                        onChoosingYes={() => handleDelete(studentToDelete._id)}
+                        student={studentSelected}
+                        onChoosingYes={() => handleDelete(studentSelected._id)}
                         onChoosingNo={() => setShowDeleteModal(false)}>
                         Do you want to delete the student?
                     </Modal>
