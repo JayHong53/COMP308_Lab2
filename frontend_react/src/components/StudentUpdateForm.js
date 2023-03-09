@@ -49,13 +49,13 @@ const StudentUpdateForm = () => {
                     <div className="form-title">Update Student</div>
                     <form className="register-form" onSubmit={handleSubmit}>
 
-                        <input type="text" placeholder="StudentNumber" name="studentNo" value={student.studentNo} onChange={onChange} />
+                        <input className="form-input" type="text" placeholder="StudentNumber" name="studentNo" value={student.studentNo} onChange={onChange} />
 
-                        <input type="text" placeholder="FirstName" name="firstName" value={student.firstName} onChange={onChange} />
+                        <input className="form-input" type="text" placeholder="FirstName" name="firstName" value={student.firstName} onChange={onChange} />
 
-                        <input type="text" placeholder="LastName" name="lastName" value={student.lastName} onChange={onChange} />
+                        <input className="form-input" type="text" placeholder="LastName" name="lastName" value={student.lastName} onChange={onChange} />
 
-                        <select name="program" value={student.program} onChange={onChange}>
+                        <select className="form-select" name="program" value={student.program} onChange={onChange}>
                             <option value="">Program</option>
                             <option value="Software Engineering Technology">
                                 Software Engineering Technology
@@ -67,19 +67,19 @@ const StudentUpdateForm = () => {
                             </option>
                         </select>
 
-                        <input type="text" placeholder="Email" name="email" value={student.email} onChange={onChange} />
+                        <input className="form-input" type="text" placeholder="Email" name="email" value={student.email} onChange={onChange} />
 
-                        <input type="text" placeholder="Phone" name="phone" value={student.phone} onChange={onChange} />
+                        <input className="form-input" type="text" placeholder="Phone" name="phone" value={student.phone} onChange={onChange} />
 
-                        <input type="text" placeholder="StreetAddress" name="street" value={student.street} onChange={onChange} />
+                        <input className="form-input" type="text" placeholder="StreetAddress" name="street" value={student.street} onChange={onChange} />
 
-                        <input type="text" placeholder="City" name="city" value={student.city} onChange={onChange} />
+                        <input className="form-input" type="text" placeholder="City" name="city" value={student.city} onChange={onChange} />
 
                         <div className="form-label" >Province</div>
-                        <select name="province" value={student.province} onChange={onChange}>
+                        <select className="form-select" name="province" value={student.province} onChange={onChange}>
                             <option value="">Province</option>
-                            <option value="AB">AB</option>
-                            <option value="BC">BC</option>
+                            <option value="Alberta">Alberta</option>
+                            <option value="British Columbia">British Columbia</option>
                             <option value="MB">MB</option>
                             <option value="NB">NB</option>
                             <option value="NL">NL</option>

@@ -62,7 +62,7 @@ body {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto 15px;
   padding: 0px 45px 45px 45px;
   text-align: center;
@@ -88,11 +88,20 @@ body {
   font-size: 13px;
 }
 
+
 .table-box td {
   background-color: #0D453E20;
   padding: 10px;
   text-align: left;
   font-size: 14px;
+}
+
+td.td-button {
+  text-align: right;
+}
+
+td.td-button button {
+  text-align: center;
 }
 
 .table-box tr {
@@ -200,6 +209,22 @@ select {
 
 .add-button-container {
   margin-top: 30px;
+}
+
+.modal-body {
+  position:absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  padding: 15px;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  z-index: 100;
+  background-color:#FAFAFA;
+  box-shadow: 0 0 20px 0 #00000020, 0 5px 5px 0 #00000025
 }
 
 .nostudent-message {
@@ -315,11 +340,6 @@ select {
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
-}
-
-.result-fare {
-  font-size: 35px;
-  margin: 15px 0 15px;
 }
 
 .message-large {

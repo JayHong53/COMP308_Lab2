@@ -1,40 +1,43 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Modal from './Modal';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFaceSadTear } from '@fortawesome/free-solid-svg-icons'
 
 const StudentList = () => {
     const apiUrl = 'http://localhost:5050/api/student/';
     const [searchVal, setSearchVal] = useState('');
     const [searchCategory, setSearchCategory] = useState('');
     const [students, setStudents] = useState([]);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [studentToDelete, setStudentToDelete] = useState();
 
-    // Replace it later... 
-    const handleDelete = (id) => {
-        if (window.confirm("Are you sure you want to delete this student?")) {
-            axios.delete(`${apiUrl}/${id}`)
-                .then(res => {
-                    console.log(res);
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-        }
-    }
+    useEffect(() => {
+        fetchData();
+    }, [])
 
+    // Fetch Data
     const fetchData = async () => {
         axios.get(apiUrl).then((res) => {
             setStudents(res.data);
         })
     }
 
-    // Reload the table 
-    const handleCancelSearch = () => {
-        setSearchVal('');
-        setSearchCategory('');
-        fetchData();
+    const handleDelete = (id) => {
+        axios.delete(`${apiUrl}/${id}`)
+            .then(res => {
+                console.log(res);
+                fetchData();
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        setShowDeleteModal(false);
+    }
+
+    const openDeleteModal = (student) => {
+        setStudentToDelete(student);
+        setShowDeleteModal(true);
     }
 
     const handleSearchByUserId = () => {
@@ -57,9 +60,12 @@ const StudentList = () => {
         }
     }
 
-    useEffect(() => {
+    // Reload the table 
+    const handleCancelSearch = () => {
+        setSearchVal('');
+        setSearchCategory('');
         fetchData();
-    },[])
+    }
 
     return (
         <div className='table-box'>
@@ -110,22 +116,30 @@ const StudentList = () => {
                                     <td>{student.program}</td>
                                     <td>{student.email}</td>
                                     <td>{student.phone}</td>
-                                    <td>
+                                    <td className="td-button">
                                         {/* <Link to={`/view/${student._id}`}>
                                     <button className="table-button-view">View</button>
                                 </Link> */}
                                         <Link to={`/update/${student._id}`}>
                                             <button className="table-button-update">Update</button>
                                         </Link>
-                                        <button className="table-button-delete" onClick={() => handleDelete(student._id)}>Delete</button>
+
+                                        {/* Delete Confirmation Modal */}
+                                        <button className="table-button-delete" onClick={() => openDeleteModal(student)}>Delete</button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+                    <Modal
+                        isOpen={showDeleteModal}
+                        student={studentToDelete}
+                        onChoosingYes={() => handleDelete(studentToDelete._id)}
+                        onChoosingNo={() => setShowDeleteModal(false)}>
+                        Do you want to delete the student?
+                    </Modal>
                     {/* Table End */}
                 </>
-
             )}
 
             {/* Add button Start  */}
